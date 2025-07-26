@@ -2,32 +2,29 @@ import $ from "jquery";
 import "select2";
 import "jquery-validation";
 import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { useRefEffect } from '@wordpress/compose';
 
 export default function Edit() {
-	const select2Ref = useRef( null );
-	const validationFormRef = useRef( null );
-
-	useEffect( () => {
-		if ( select2Ref.current ) {
-			$( select2Ref.current ).select2( {
-				dropdownParent: $( select2Ref.current ).parent(),
+	const select2Ref = useRefEffect( (element) => {
+			$( element ).select2( {
+				dropdownParent: $( element ).parent(),
 				width: '100%',
 			} );
-		}
 
-		if ( validationFormRef.current ) {
-			$( validationFormRef.current ).validate( {
-				rules: {
-					username: { required: true, minlength: 5 },
-				},
-			} );
-		}
+			return () => {
+				$( element ).select2( 'destroy' );
+			};
+	}, [] );
+
+	const validationFormRef = useRefEffect( (element) => {
+		$( element ).validate( {
+			rules: {
+				username: { required: true, minlength: 5 },
+			},
+		} );
 
 		return () => {
-			if ( select2Ref.current ) {
-				$( select2Ref.current ).select2( 'destroy' );
-			}
+			$( element ).validate( 'destroy' );
 		};
 	}, [] );
 
