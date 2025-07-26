@@ -1,0 +1,23 @@
+{
+	"name": "jquery-block",
+	"version": "1.0.0",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"wp-env": "wp-env",
+		"build": "wp-scripts build --blocks-manifest",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "wp-scripts start --blocks-manifest"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^10.27.0",
+		"@wordpress/scripts": "^30.20.0"
+	},
+	"dependencies": {
+		"jquery": "^3.7.1",
+		"jquery-ui": "^1.14.1",
+		"jquery-validation": "^1.21.0",
+		"select2": "^4.1.0-rc.0"
+	}
+}
